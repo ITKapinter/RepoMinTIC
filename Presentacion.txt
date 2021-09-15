@@ -1,3 +1,4 @@
 Equipo ITKapinter
 
-Mi nombre es Marcela Reyes, vivo en Bogotá. Soy ingeniera catastral y geodesta. 
+Mi nombre es Marcela Reyes, vivo en Bogotá. Soy ingeniera catastral y geodesta.
+Mi rol dentro del equipo es de administradora de BD
