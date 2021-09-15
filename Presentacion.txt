@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 Mi nombre es Juan Felipe Osorio, mi rol es analista, cuyo enfoque es levantar las necesidades 
 del negocio para convertilas en requerimientos del sistema.
+=======
+Equipo ITKapinter
+
+Mi nombre es Marcela Reyes, vivo en Bogotá. Soy ingeniera catastral y geodesta.
+Mi rol dentro del equipo es de administradora de BD
+>>>>>>> 088b565b7e51205d32b04e94a4492fc0a6d6ed30
