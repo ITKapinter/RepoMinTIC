@@ -1,3 +1,13 @@
+Descripción:
+Con el proyecto se analiza, diseña y construye una aplicación software para las empresas de Manufactura que
+permita ingresar o registrar los pedidos y los datos necesarios para ser procesado, de igual manera
+establecer los diferentes estados de la venta a lo largo del ciclo de vida de la línea
+de producción (creación, embalaje, despacho, ruta, ubicación, recepción); de igual forma ingresar
+la información de los vendedores que participan en un negocio de ventas, asi como la posibilidad
+de restringir/otorgar accesos al sistema de información de acuerdo al rol del usuario que ingrese con
+su login y password de usuario
+
+
 Equipo ITKapinter
 
 Mi nombre es Marcela Reyes, vivo en Bogotá. Soy ingeniera catastral y geodesta.
@@ -9,3 +19,12 @@ del producto.
 
 Mi nombre es Juan Felipe Osorio, mi rol es analista, cuyo enfoque es levantar las necesidades 
 del negocio para convertilas en requerimientos del sistema.
+
+Mi nombre es Julio Stevenson, soy Ingeniero industria de la ECCI de Bogotá, actualmente soy
+Product Owner y mi responsabilidad esta enfocada optimizar y maximizar el valor nuestro proyecto 
+
+Desarrollador(rol)
+Mayerlín Mondol Cortés
+Analista y Programador en lenguajes  y Administradora en Sistemas Informáticos  
+Nacida en Cartagena de Indias
+Apasionada del aprendizaje constante y continuo
