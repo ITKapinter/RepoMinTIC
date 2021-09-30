@@ -1,15 +1,15 @@
-import React from 'react';
-import Navbar from 'components/Navbar';
+import Header from 'components/Navbar';
 import Footer from 'components/Footer';
+import React from 'react';
 
-const PublicLayout = ({ children }) => {
+const Layout = ({children}) => {
   return (
     <div className='mainContainer'>
-      <Navbar />
+      <Header />
       <main>{children}</main>
       <Footer />
     </div>
   );
 };
 
-export default PublicLayout;
+export default Layout;
