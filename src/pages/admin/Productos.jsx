@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const prodcutosBackend = [
   {
@@ -63,8 +65,13 @@ const Productos = () => {
         {mostrarTabla ? (
           <TablaProductos listaProductos={productos} />
         ) : (
-          <FormularioProductos />
+          <FormularioProductos
+            setMostrarTabla={setMostrarTabla}
+            listaProductos={productos}
+            setProductos={setProductos}
+          />
         )}
+        <ToastContainer position="bottom-center" autoClose={5000} />
       </div>
     </div>
   );
@@ -78,10 +85,10 @@ const TablaProductos = ({ listaProductos }) => {
       <table>
         <thead>
           <tr>
-            <th> ID Producto</th>
-            <th> Descripción</th>
-            <th> Valor Unitario</th>
-            <th> Estado</th>
+            <th>ID Producto</th>
+            <th>Descripción</th>
+            <th>Valor Unitario</th>
+            <th>Estado</th>
           </tr>
         </thead>
         <tbody>
@@ -101,67 +108,79 @@ const TablaProductos = ({ listaProductos }) => {
   );
 };
 
-const FormularioProductos = () => {
-  const [idProducto, setIdProducto] = useState();
-  const [nombreProducto, setNombreProducto] = useState();
-  const [valorUnitario, setValorUnitario] = useState();
-  const [estado, setEstado] = useState();
+const FormularioProductos = ({
+  setMostrarTabla,
+  listaProductos,
+  setProductos,
+}) => {
+  const form = useRef(null);
 
-  useEffect(() => {
-    console.log("El valor del ID del producto es ", idProducto);
-  }, [idProducto]);
+  const submitForm = (e) => {
+    e.preventDefault();
+    const fd = new FormData(form.current);
 
-  const enviarDatos = () => {
-    console.log("El valor de IdProducto es ", idProducto);
+    const nuevoProducto = {};
+    fd.forEach((value, key) => {
+      nuevoProducto[key] = value;
+    });
+
+    setMostrarTabla(true);
+    setProductos([...listaProductos, nuevoProducto]);
+
+    toast.success("Se ha registrado el producto con éxito");
   };
   return (
     <div className="flex flex-col items-center justify-center">
       <h2 className="text-2xl font-extrabold text-gray-700">
         Registrar nuevo producto
       </h2>
-      <form className="grid grid-cols-2 m-4">
+      <form ref={form} onSubmit={submitForm} className="grid grid-cols-2 m-4">
         <label htmlFor="idProducto">
           ID Producto
           <input
-            value={idProducto}
-            onChange={(e) => {
-              setIdProducto(e.target.value);
-            }}
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg"
+            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             name="idProducto"
             type="number"
+            min={0}
+            required
             placeholder=""
           />
         </label>
-        <label htmlFor="Producto">
+        <label htmlFor="nombreProducto">
           Descripción
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg"
-            name='Producto'
+            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            name="nombreProducto"
             type="text"
+            required
             placeholder=""
           />
         </label>
         <label htmlFor="valorUnitario">
           Valor Unitario
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg"
+            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            name="valorUnitario"
             type="number"
+            min={0}
+            required
             placeholder=""
           />
         </label>
         <label htmlFor="estado">
           Estado
-          <select className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg">
-            <option disabled='true'>Seleccione una opción </option>
+          <select className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+          name="estado"
+          defaultValue={0}
+          >
+            <option disabled value={0}>Seleccione una opción </option>
             <option>Disponible </option>
             <option>No disponible </option>
-          </select>          
-        </label >
+          </select>
+        </label>
         <button
-          type="button"
-          onClick={enviarDatos}
-          className="bg-indigo-400 p-2 rounded-3xl shadow-md hover:bg-indigo-600 text-white my-4 w-28"
+          type="submit"
+          className="group relative flex justify-center py-2 px-4 my-6 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-400 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Guardar Producto
         </button>
