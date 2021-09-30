@@ -6,18 +6,22 @@ import Productos from 'media/Productos.jpg';
 
 function Index() {
   return (
-    <div className='container max-h-screen '>
-      <h1>Productos tecnologicos</h1>
-       <section>
-           <ul className='flex w-full justify-between my-1'>
+    <div class=" h-full w-full">
+      <h2 className='mt-6 text-center text-2xl font-extrabold text-gray-900'>
+        Productos tecnologicos
+      </h2>
+      <section >
+        <ul className='flex flex-auto my-3'>
             <CardProductos nombreProducto='Teclado' imagen={Teclado} />
             <CardProductos nombreProducto='Productos' imagen={Productos} />
             <CardProductos nombreProducto='Productos' imagen={Productos} />
             <CardProductos nombreProducto='Productos' imagen={Teclado} />
             <CardProductos nombreProducto='Productos' imagen={Productos} />
             <CardProductos nombreProducto='Pantallas' imagen={Pantallas} />
+            <CardProductos nombreProducto='Pantallas' imagen={Pantallas} />
           </ul>
-       </section>
+      </section>
+              
   </div>
   );
 }
