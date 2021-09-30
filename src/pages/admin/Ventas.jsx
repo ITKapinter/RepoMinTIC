@@ -161,7 +161,8 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
       <h2 className="text-2xl font-extrabold text-gray-700">
         Registrar nueva Venta
       </h2>
-      <form ref={form} onSubmit={submitForm} className="grid grid-cols-5 m-4">
+      <form ref={form} onSubmit={submitForm} className="grid grid-cols-4
+       m-4">
         <label htmlFor="idVenta">
           Código Venta
           <input
