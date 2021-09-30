@@ -61,6 +61,7 @@ const Productos = () => {
           {textoBoton}
         </button>
       </div>
+
       <div className="p-10">
         {mostrarTabla ? (
           <TablaProductos listaProductos={productos} />
@@ -81,8 +82,39 @@ const Productos = () => {
 const TablaProductos = ({ listaProductos }) => {
   return (
     <div className="flex flex-col items-center justify-center">
+      <div>
+        <form className="grid grid-cols-4 m-4">
+          <input
+            className=" bg-gray-50 border border-gray-200 m-4 p-3 rounded-lg appearance-none relative block px-3 py-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            type="number"
+            name="codigo"
+            min={0}
+            placeholder="Buscar ID Producto"
+          />
+          <input
+            className=" bg-gray-50 border border-gray-200 m-4 p-3 rounded-lg appearance-none relative block px-3 py-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            type="text"
+            name="descripcion"
+            placeholder="Buscar por descripción"
+          />
+          <select
+            className=" bg-gray-50 border border-gray-200 m-4 rounded-lg appearance-none relative block px-3 py-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            name="buscarEstado"
+            defaultValue={0}
+          >
+            <option disabled value={0}>
+              Buscar por estado
+            </option>
+            <option>Disponible </option>
+            <option>No disponible </option>
+          </select>
+          <button className=" w-px">
+            <i className="fas fa-search" />
+          </button>
+        </form>
+      </div>
       <h2 className="text-2xl font-extrabold text-gray-700">Productos</h2>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>ID Producto</th>
@@ -98,7 +130,7 @@ const TablaProductos = ({ listaProductos }) => {
                 <td> {productos.idProducto} </td>
                 <td> {productos.nombreProducto} </td>
                 <td> {productos.valorUnitario} </td>
-                <td> {productos.estado} </td>
+                <td className="border border-gray-100 px-4 py-2"> {productos.estado} </td>
               </tr>
             );
           })}
@@ -169,11 +201,14 @@ const FormularioProductos = ({
         </label>
         <label htmlFor="estado">
           Estado
-          <select className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-          name="estado"
-          defaultValue={0}
+          <select
+            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            name="estado"
+            defaultValue={0}
           >
-            <option disabled value={0}>Seleccione una opción </option>
+            <option disabled value={0}>
+              Seleccione una opción{" "}
+            </option>
             <option>Disponible </option>
             <option>No disponible </option>
           </select>

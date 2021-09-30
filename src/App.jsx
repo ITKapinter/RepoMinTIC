@@ -5,6 +5,7 @@ import Admin from "pages/admin/Index";
 import Login from "pages/auth/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "styles/styles.css";
+import "styles/table.css";
 
 import AuthLayout from "layouts/AuthLayout";
 import Productos from "pages/admin/Productos";
