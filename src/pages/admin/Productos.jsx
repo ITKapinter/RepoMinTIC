@@ -46,7 +46,7 @@ const Productos = () => {
   }, [mostrarTabla]);
   return (
     <div className="flex h-full w-full flex-col items-center justify-start p-10">
-      <div className="flex flex-col items-baseline">
+      <div className="flex flex-col items-center">
         <h2 className="text-3xl font-extrabold text-gray-900">
           Administración de productos
         </h2>
@@ -102,10 +102,10 @@ const TablaProductos = ({ listaProductos }) => {
 };
 
 const FormularioProductos = () => {
-  const [idProducto, setIdProducto] = useState(" ");
-  const [nombreProducto, setNombreProducto] = useState(" ");
-  const [valorUnitario, setValorUnitario] = useState(" ");
-  const [estado, setEstado] = useState(" ");
+  const [idProducto, setIdProducto] = useState();
+  const [nombreProducto, setNombreProducto] = useState();
+  const [valorUnitario, setValorUnitario] = useState();
+  const [estado, setEstado] = useState();
 
   useEffect(() => {
     console.log("El valor del ID del producto es ", idProducto);
@@ -119,7 +119,7 @@ const FormularioProductos = () => {
       <h2 className="text-2xl font-extrabold text-gray-700">
         Registrar nuevo producto
       </h2>
-      <form className="grid grid-cols-2">
+      <form className="grid grid-cols-2 m-4">
         <label htmlFor="idProducto">
           ID Producto
           <input
@@ -137,6 +137,7 @@ const FormularioProductos = () => {
           Descripción
           <input
             className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg"
+            name='Producto'
             type="text"
             placeholder=""
           />
@@ -151,16 +152,16 @@ const FormularioProductos = () => {
         </label>
         <label htmlFor="estado">
           Estado
-          <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg"
-            type="text"
-            placeholder=""
-          />
-        </label>
+          <select className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg">
+            <option disabled='true'>Seleccione una opción </option>
+            <option>Disponible </option>
+            <option>No disponible </option>
+          </select>          
+        </label >
         <button
           type="button"
           onClick={enviarDatos}
-          className="bg-indigo-400 p-2 rounded-3xl shadow-md hover:bg-indigo-600 text-white my-4 w-28 self-end"
+          className="bg-indigo-400 p-2 rounded-3xl shadow-md hover:bg-indigo-600 text-white my-4 w-28"
         >
           Guardar Producto
         </button>
