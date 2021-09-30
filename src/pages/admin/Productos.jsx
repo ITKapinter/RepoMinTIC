@@ -180,7 +180,7 @@ const FormularioProductos = ({
         </label>
         <button
           type="submit"
-          className="group relative flex justify-center py-2 px-4 my-6 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-400 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="flex justify-center py-2 px-4 my-6 border border-transparent text-sm font-bold rounded-md text-white bg-indigo-400 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Guardar Producto
         </button>
