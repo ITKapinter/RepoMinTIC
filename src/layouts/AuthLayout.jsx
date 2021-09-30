@@ -10,7 +10,7 @@ const AuthLayout = ({ children }) => {
           <i className='fas fa-home cursor-pointer hover:text-indigo-500' />
         </Link>
       </div>
-      <div className='max-w-md w-full'>
+      <div className='max-w-md w-full' >
         <img className='mx-auto h-52 w-auto' src={Logo} alt='Workflow' />
         {children}
       </div>
