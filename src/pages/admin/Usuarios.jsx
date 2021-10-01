@@ -92,6 +92,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
               <th>Correo</th>
               <th>Estado</th>
               <th>Rol</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tbody>
@@ -102,8 +103,9 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                   <td> {usuarios.nombre} </td>
                   <td> {usuarios.apellido} </td>
                   <td> {usuarios.correo} </td>
-                  <td> {usuarios.estado} </td>
+                  <td> {usuarios.estadoUsuario} </td>
                   <td> {usuarios.rol} </td>
+                  <td> <i className="fas fa-pencil-alt p-2" />  <i className="fas fa-trash-alt p-2" />  </td>
                 </tr>
               );
             })}

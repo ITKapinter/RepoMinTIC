@@ -112,6 +112,7 @@ const TablaVentas = ({ listaVentas }) => {
             <th>Valor Total</th>
             <th>Estado Venta</th>
             <th>Fecha Venta</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
@@ -129,6 +130,7 @@ const TablaVentas = ({ listaVentas }) => {
                 <td> {ventas.valorTotal} </td>
                 <td> {ventas.estadoVenta} </td>
                 <td> {ventas.fechaVenta} </td>
+                <td> <i className="fas fa-pencil-alt" />  <i className="fas fa-trash-alt" />  </td>
               </tr>
             );
           })}

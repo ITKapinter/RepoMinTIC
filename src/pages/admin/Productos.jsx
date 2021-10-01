@@ -121,6 +121,7 @@ const TablaProductos = ({ listaProductos }) => {
             <th>Descripción</th>
             <th>Valor Unitario</th>
             <th>Estado</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
@@ -130,7 +131,8 @@ const TablaProductos = ({ listaProductos }) => {
                 <td> {productos.idProducto} </td>
                 <td> {productos.nombreProducto} </td>
                 <td> {productos.valorUnitario} </td>
-                <td className="border border-gray-100 px-4 py-2"> {productos.estado} </td>
+                <td> {productos.estado} </td>
+                <td> <i className="fas fa-pencil-alt p-2" />  <i className="fas fa-trash-alt p-2" />  </td>
               </tr>
             );
           })}
