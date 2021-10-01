@@ -24,44 +24,44 @@ function App() {
         <Switch>
           <Route
             path={[
-              "/index",
-              "/index/ventas",
-              "/index/ventas/registrarventa",
-              "/index/ventas/editarventa",
-              "/index/productos",
-              "/index/productos/editarproducto",
-              "/index/productos/registrarproducto",
-              "/index/usuarios",
-              "/index/usuarios/editarusuario",
+              "/admin",
+              "/admin/ventas",
+              "/admin/ventas/registrarventa",
+              "/admin/ventas/editarventa",
+              "/admin/productos",
+              "/admin/productos/editarproducto",
+              "/admin/productos/registrarproducto",
+              "/admin/usuarios",
+              "/admin/usuarios/editarusuario",
             ]}
           >
             <PrivateLayout>
               <Switch>
-                <Route path="/index/ventas/registrarventa">
+                <Route path="/admin/ventas/registrarventa">
                   <RegistrarVenta />
                 </Route>
-                <Route path="/index/ventas/editarventa">
+                <Route path="/admin/ventas/editarventa">
                   <EditarVenta />
                 </Route>
-                <Route path="/index/ventas">
+                <Route path="/admin/ventas">
                   <Ventas />
                 </Route>
-                <Route path="/index/productos/registrarproducto">
+                <Route path="/admin/productos/registrarproducto">
                   <RegistrarProducto />
                 </Route>
-                <Route path="/index/productos/editarproducto">
+                <Route path="/admin/productos/editarproducto">
                   <EditarProducto />
                 </Route>
-                <Route path="/index/productos">
+                <Route path="/admin/productos">
                   <Productos />
                 </Route>
-                <Route path="/index/usuarios/editarusuario">
+                <Route path="/admin/usuarios/editarusuario">
                   <EditarUsuario />
                 </Route>
-                <Route path="/index/usuarios">
+                <Route path="/admin/usuarios">
                   <Usuarios />
                 </Route>
-                <Route path="/index">
+                <Route path="/admin">
                   <Admin />
                 </Route>
               </Switch>

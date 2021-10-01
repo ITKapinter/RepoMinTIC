@@ -87,7 +87,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
           <thead>
             <tr>
               <th>Cedula</th>
-              <th>Nombre Vendedor</th>
+              <th>Nombre</th>
               <th>Apellido</th>
               <th>Correo</th>
               <th>Estado</th>
