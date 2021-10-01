@@ -276,7 +276,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
           </select>
         </label>
         <label htmlFor="fechaVenta">
-          Valor Total
+          Fecha Venta
           <input
             className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             name="fechaVenta"
