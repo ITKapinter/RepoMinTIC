@@ -1,12 +1,12 @@
 import React from "react";
 import Google from "media/google_logo.png";
-import { Link } from "react-router-dom";
+
 
 const Login = () => {
   return (
     <>
       <div className="max-w-md w-full space-y-8">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-indigo-900">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-purple-900">
           -------Bienvenido-------
         </h2>
       </div>
