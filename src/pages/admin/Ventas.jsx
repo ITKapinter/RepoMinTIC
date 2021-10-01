@@ -130,7 +130,7 @@ const TablaVentas = ({ listaVentas }) => {
                 <td> {ventas.valorTotal} </td>
                 <td> {ventas.estadoVenta} </td>
                 <td> {ventas.fechaVenta} </td>
-                <td> <i className="fas fa-pencil-alt" />  <i className="fas fa-trash-alt" />  </td>
+                <td> <i className="fas fa-pencil-alt p-2 hover:bg-gray-300 rounded-full" />  <i className="fas fa-trash-alt p-2 hover:bg-gray-300 rounded-full" />  </td>
               </tr>
             );
           })}

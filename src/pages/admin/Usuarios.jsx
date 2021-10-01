@@ -105,7 +105,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                   <td> {usuarios.correo} </td>
                   <td> {usuarios.estadoUsuario} </td>
                   <td> {usuarios.rol} </td>
-                  <td> <i className="fas fa-pencil-alt p-2" />  <i className="fas fa-trash-alt p-2" />  </td>
+                  <td> <i className="fas fa-pencil-alt p-2 hover:bg-gray-300 rounded-full" />  <i className="fas fa-trash-alt p-2 hover:bg-gray-300 rounded-full" />  </td>
                 </tr>
               );
             })}
