@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PrivateLayout from "layouts/PrivateLayout";
 import PublicLayout from "layouts/PublicLayout";
-//import Index from "pages/Index";
+import Index from "pages/Index";
 import Admin from "pages/admin/Admin";
 import Login from "pages/auth/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -80,7 +80,7 @@ function App() {
           <Route path={["/"]}>
             <PublicLayout>
               <Route path="/">
-                <Admin />
+                <Index />
               </Route>
             </PublicLayout>
           </Route>
