@@ -284,7 +284,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
             name="fechaVenta"
             type="date"            
             required
-            placeholder="dd/mm/año"
+            placeholder=""
           />
         </label>
         <button
