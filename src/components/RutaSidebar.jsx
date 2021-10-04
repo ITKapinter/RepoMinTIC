@@ -14,4 +14,4 @@ const Ruta = ({ icono, ruta, nombre }) => {
     );
   };
 
-export default Ruta
+export default Ruta;
