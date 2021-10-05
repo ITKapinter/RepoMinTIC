@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React, { useEffect, useState, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -48,7 +49,7 @@ const Productos = () => {
   }, [mostrarTabla]);
   return (
     <div className="flex h-full w-full flex-col items-center justify-start p-10">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center w-full">
         <h2 className="text-3xl font-extrabold text-gray-900">
           Administración de productos
         </h2>
@@ -81,7 +82,7 @@ const Productos = () => {
 //componentes para mostar formulario o tabla
 const TablaProductos = ({ listaProductos }) => {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center w-full">
       <div>
         <form className="grid grid-cols-4 m-4">
           <input
@@ -127,12 +128,17 @@ const TablaProductos = ({ listaProductos }) => {
         <tbody>
           {listaProductos.map((productos) => {
             return (
-              <tr>
+              <tr key={nanoid()}>
                 <td> {productos.idProducto} </td>
                 <td> {productos.nombreProducto} </td>
                 <td> {productos.valorUnitario} </td>
                 <td> {productos.estado} </td>
-                <td> <i className="fas fa-pencil-alt p-2 hover:bg-gray-300 rounded-full" />  <i className="fas fa-trash-alt p-2 hover:bg-gray-300 rounded-full" />  </td>
+                <td>
+                  <div className="flex w-full justify-around">
+                    <i className="fas fa-pencil-alt p-2 hover:bg-blue-600 rounded-full" />
+                    <i className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full" />
+                  </div>
+                </td>
               </tr>
             );
           })}
