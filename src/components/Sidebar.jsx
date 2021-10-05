@@ -14,15 +14,29 @@ const Sidebar = () => {
         </Link>
 
         <div className="my-10">
-          <Ruta icono="fab fa-product-hunt" ruta="/admin/Productos" nombre="Productos"/>
-          <Ruta icono="fas fa-cash-register" ruta="/admin/Ventas" nombre="Ventas"/>
+          <Ruta
+            icono="fab fa-product-hunt"
+            ruta="/admin/Productos"
+            nombre="Productos"
+          />
+          <Ruta
+            icono="fas fa-cash-register"
+            ruta="/admin/Ventas"
+            nombre="Ventas"
+          />
           <Ruta icono="fas fa-users" ruta="/admin/Usuarios" nombre="Usuarios" />
         </div>
-        <Ruta icono="fas fa-door-closed" ruta="/" nombre="Cerrar Sección" />
+        <li className="py-2">
+          <Link to="/">
+            <span className="block px-3 py-3 mt-2 text-sm font-semibold text-gray-500 rounded-lg dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-white focus:text-white hover:bg-purple-500 focus:outline-none focus:shadow-outline">
+              <i className="fas fa-door-closed" />
+              Cerrar Sección
+            </span>
+          </Link>
+        </li>
       </ul>
     </nav>
   );
 };
-
 
 export default Sidebar;
