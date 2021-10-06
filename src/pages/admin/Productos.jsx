@@ -1,3 +1,4 @@
+import { Dialog, Tooltip } from "@material-ui/core";
 import { nanoid } from "nanoid";
 import React, { useEffect, useState, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -139,6 +140,7 @@ const TablaProductos = ({ listaProductos }) => {
 
 const FilaProducto = ({ productos }) => {
   const [edit, setEdit] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   return (
     <tr>
       {edit ? (
@@ -165,9 +167,11 @@ const FilaProducto = ({ productos }) => {
             />
           </td>
           <td>
-            <select className="Input"
+            <select
+              className="Input"
               type="text"
-              defaultValue={productos.estado}>
+              defaultValue={productos.estado}
+            >
               <option disabled value={0}>
                 Seleccione una opción{" "}
               </option>
@@ -187,20 +191,54 @@ const FilaProducto = ({ productos }) => {
       <td>
         <div className="flex w-full justify-around">
           {edit ? (
-            <button type="submit">
-              <i
-                onClick={() => setEdit(!edit)}
-                className="fas fa-check p-2 hover:bg-blue-600 rounded-full"
-              />
-            </button>
+            <>
+              <Tooltip title="Confirmar Edición" arrow >
+                <i
+                  onClick={() => setEdit(!edit)}
+                  className="fas fa-check p-2 hover:bg-blue-600 rounded-full"
+                />
+              </Tooltip>
+              <Tooltip title="Cancelar Edición" arrow >
+                <i
+                  onClick={() => setEdit(!edit)}
+                  className="fas fa-times p-2 hover:bg-blue-600 rounded-full"
+                />
+              </Tooltip>
+
+            </>
+
           ) : (
-            <i
-              onClick={() => setEdit(!edit)}
-              className="fas fa-pencil-alt p-2 hover:bg-blue-600 rounded-full"
-            />
+            <>
+              <Tooltip title="Editar Producto" arrow >
+                <i
+                  onClick={() => setEdit(!edit)}
+                  className="fas fa-pencil-alt p-2 hover:bg-blue-600 rounded-full"
+                />
+              </Tooltip>
+              <Tooltip title="Elminar Producto" arrow >
+                <i onClick={() => setOpenDialog(true)} className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full" />
+              </Tooltip>
+            </>
           )}
-          <i className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full" />
         </div>
+        <Dialog open={openDialog}>
+          <div className="p-8 flex flex-col">
+            <h1 className="text-gray-900 text-2xl font-bold">
+              ¿Está seguro de querer eliminar el producto?
+            </h1>
+            <div className="flex w-full items-center justify-center my-4">
+              <button className="mx-2 px-4 py-2 bg-blue-500 text-white hover:bg-blue-700 rounded-md shadow-md">
+                Sí
+              </button>
+              <button
+              onClick={()=> setOpenDialog(false)}
+              className="mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md">
+                No
+              </button>
+            </div>
+          </div>
+
+        </Dialog>
       </td>
     </tr>
   );
