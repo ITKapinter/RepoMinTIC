@@ -119,25 +119,7 @@ const TablaVentas = ({ listaVentas }) => {
         <tbody>
           {listaVentas.map((ventas) => {
             return (
-              <tr key={nanoid()}>
-                <td> {ventas.idVenta} </td>
-                <td> {ventas.idVendedor} </td>
-                <td> {ventas.idcliente} </td>
-                <td> {ventas.nombreCliente} </td>
-                <td> {ventas.idProducto} </td>
-                <td> {ventas.nombreProducto} </td>
-                <td> {ventas.cantidad} </td>
-                <td> {ventas.valorUnitario} </td>
-                <td> {ventas.valorTotal} </td>
-                <td> {ventas.estadoVenta} </td>
-                <td> {ventas.fechaVenta} </td>
-                <td>
-                  <div className="flex w-full justify-around">
-                    <i className="fas fa-pencil-alt p-2 hover:bg-blue-600 rounded-full" />
-                    <i className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full" />
-                  </div>
-                </td>
-              </tr>
+              <FilaVenta  key={nanoid()} ventas={ventas} />
             );
           })}
         </tbody>
@@ -145,6 +127,30 @@ const TablaVentas = ({ listaVentas }) => {
     </div>
   );
 };
+
+const FilaVenta = ({ventas}) => {
+  return(
+    <tr>
+    <td> {ventas.idVenta} </td>
+    <td> {ventas.idVendedor} </td>
+    <td> {ventas.idcliente} </td>
+    <td> {ventas.nombreCliente} </td>
+    <td> {ventas.idProducto} </td>
+    <td> {ventas.nombreProducto} </td>
+    <td> {ventas.cantidad} </td>
+    <td> {ventas.valorUnitario} </td>
+    <td> {ventas.valorTotal} </td>
+    <td> {ventas.estadoVenta} </td>
+    <td> {ventas.fechaVenta} </td>
+    <td>
+      <div className="flex w-full justify-around">
+        <i className="fas fa-pencil-alt p-2 hover:bg-blue-600 rounded-full" />
+        <i className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full" />
+      </div>
+    </td>
+  </tr>
+  )
+}
 
 const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
   const form = useRef(null);
@@ -174,7 +180,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="idVenta">
           Código Venta
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="idVenta"
             type="number"
             min={0}
@@ -185,7 +191,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="idVendedor">
           Código Vendedor
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="idVendedor"
             type="number"
             min={0}
@@ -196,7 +202,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="idcliente">
           Código Cliente
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="idcliente"
             type="number"
             min={0}
@@ -207,7 +213,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="nombreCliente">
           Nombre Cliente
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="nombreCliente"
             type="text"
             required
@@ -217,7 +223,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="idProducto">
           Código Producto
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="idProducto"
             type="number"
             min={0}
@@ -228,7 +234,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="nombreProducto">
           Descripción
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="nombreProducto"
             type="text"
             required
@@ -238,7 +244,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="cantidad">
           Cantidad
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="cantidad"
             type="number"
             min={0}
@@ -249,7 +255,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="valorUnitario">
           Valor Unitario
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="valorUnitario"
             type="number"
             min={0}
@@ -260,7 +266,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="valorTotal">
           Valor Total
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="valorTotal"
             type="number"
             min={0}
@@ -271,7 +277,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="estadoVenta">
           Estado Venta
           <select
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="estadoVenta"
             defaultValue={0}
           >
@@ -286,7 +292,7 @@ const FormularioVentas = ({ setMostrarTabla, listaVentas, setVentas }) => {
         <label htmlFor="fechaVenta">
           Fecha Venta
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="fechaVenta"
             type="date"            
             required

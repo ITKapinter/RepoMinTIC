@@ -115,36 +115,94 @@ const TablaProductos = ({ listaProductos }) => {
         </form>
       </div>
       <h2 className="text-2xl font-extrabold text-gray-700">Productos</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>ID Producto</th>
-            <th>Descripción</th>
-            <th>Valor Unitario</th>
-            <th>Estado</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listaProductos.map((productos) => {
-            return (
-              <tr key={nanoid()}>
-                <td> {productos.idProducto} </td>
-                <td> {productos.nombreProducto} </td>
-                <td> {productos.valorUnitario} </td>
-                <td> {productos.estado} </td>
-                <td>
-                  <div className="flex w-full justify-around">
-                    <i className="fas fa-pencil-alt p-2 hover:bg-blue-600 rounded-full" />
-                    <i className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full" />
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <form className="w-full">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>ID Producto</th>
+              <th>Descripción</th>
+              <th>Valor Unitario</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listaProductos.map((productos) => {
+              return <FilaProducto key={nanoid()} productos={productos} />;
+            })}
+          </tbody>
+        </table>
+      </form>
     </div>
+  );
+};
+
+const FilaProducto = ({ productos }) => {
+  const [edit, setEdit] = useState(false);
+  return (
+    <tr>
+      {edit ? (
+        <>
+          <td>
+            <input
+              className="Input"
+              type="number"
+              defaultValue={productos.idProducto}
+            />
+          </td>
+          <td>
+            <input
+              className="Input"
+              type="text"
+              defaultValue={productos.nombreProducto}
+            />
+          </td>
+          <td>
+            <input
+              className="Input"
+              type="number"
+              defaultValue={productos.valorUnitario}
+            />
+          </td>
+          <td>
+            <select className="Input"
+              type="text"
+              defaultValue={productos.estado}>
+              <option disabled value={0}>
+                Seleccione una opción{" "}
+              </option>
+              <option>Disponible </option>
+              <option>No disponible </option>
+            </select>
+          </td>
+        </>
+      ) : (
+        <>
+          <td> {productos.idProducto} </td>
+          <td> {productos.nombreProducto} </td>
+          <td> {productos.valorUnitario} </td>
+          <td> {productos.estado} </td>
+        </>
+      )}
+      <td>
+        <div className="flex w-full justify-around">
+          {edit ? (
+            <button type="submit">
+              <i
+                onClick={() => setEdit(!edit)}
+                className="fas fa-check p-2 hover:bg-blue-600 rounded-full"
+              />
+            </button>
+          ) : (
+            <i
+              onClick={() => setEdit(!edit)}
+              className="fas fa-pencil-alt p-2 hover:bg-blue-600 rounded-full"
+            />
+          )}
+          <i className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full" />
+        </div>
+      </td>
+    </tr>
   );
 };
 
@@ -178,7 +236,7 @@ const FormularioProductos = ({
         <label htmlFor="idProducto">
           ID Producto
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="idProducto"
             type="number"
             min={0}
@@ -189,7 +247,7 @@ const FormularioProductos = ({
         <label htmlFor="nombreProducto">
           Descripción
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="nombreProducto"
             type="text"
             required
@@ -199,7 +257,7 @@ const FormularioProductos = ({
         <label htmlFor="valorUnitario">
           Valor Unitario
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="valorUnitario"
             type="number"
             min={0}
@@ -209,11 +267,7 @@ const FormularioProductos = ({
         </label>
         <label htmlFor="estado">
           Estado
-          <select
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            name="estado"
-            defaultValue={0}
-          >
+          <select className="Input" name="estado" defaultValue={0}>
             <option disabled value={0}>
               Seleccione una opción{" "}
             </option>

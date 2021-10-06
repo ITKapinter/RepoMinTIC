@@ -99,20 +99,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
         <tbody>
           {listaUsuarios.map((usuarios) => {
             return (
-              <tr key={nanoid()}>
-                <td> {usuarios.cedula} </td>
-                <td> {usuarios.nombre} </td>
-                <td> {usuarios.apellido} </td>
-                <td> {usuarios.correo} </td>
-                <td> {usuarios.estadoUsuario} </td>
-                <td> {usuarios.rol} </td>
-                <td>
-                  <div className="flex w-full justify-around">
-                    <i className="fas fa-pencil-alt p-2 hover:bg-blue-600 rounded-full" />
-                    <i className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full" />
-                  </div>
-                </td>
-              </tr>
+              <FilaUsuario  key={nanoid()} usuarios={usuarios} />
             );
           })}
         </tbody>
@@ -120,6 +107,26 @@ const TablaUsuarios = ({ listaUsuarios }) => {
     </div>
   );
 };
+
+const FilaUsuario = ({usuarios}) => {
+  return(
+    <tr>
+    <td> {usuarios.cedula} </td>
+    <td> {usuarios.nombre} </td>
+    <td> {usuarios.apellido} </td>
+    <td> {usuarios.correo} </td>
+    <td> {usuarios.estadoUsuario} </td>
+    <td> {usuarios.rol} </td>
+    <td>
+      <div className="flex w-full justify-around">
+        <i className="fas fa-pencil-alt p-2 hover:bg-blue-600 rounded-full" />
+        <i className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full" />
+      </div>
+    </td>
+  </tr>
+
+  )
+}
 
 const FormularioUsuarios = ({
   setMostrarTabla,
@@ -152,7 +159,7 @@ const FormularioUsuarios = ({
         <label htmlFor="cedula">
           Cedula
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="cedula"
             type="number"
             min={0}
@@ -164,7 +171,7 @@ const FormularioUsuarios = ({
         <label htmlFor="nombre">
           Nombre
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="nombre"
             type="text"
             required
@@ -175,7 +182,7 @@ const FormularioUsuarios = ({
         <label htmlFor="apellido">
           Apellido
           <input
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="apellido"
             type="text"
             required
@@ -186,7 +193,7 @@ const FormularioUsuarios = ({
         <label htmlFor="estado">
           Estado
           <select
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="estado"
             defaultValue={0}
           >
@@ -202,7 +209,7 @@ const FormularioUsuarios = ({
         <label htmlFor="rol">
           Rol
           <select
-            className=" bg-gray-50 border border-gray-200 m-2 p-3 rounded-lg appearance-none relative block px-3 py-2 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+            className="Input"
             name="rol"
             defaultValue={0}
           >
