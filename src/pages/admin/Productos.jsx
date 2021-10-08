@@ -52,7 +52,10 @@ const Productos = () => {
 
       <div className="p-10">
         {mostrarTabla ? (
-          <TablaProductos listaProductos={productos} setEjecutarConsulta={setEjecutarConsulta} />
+          <TablaProductos
+            listaProductos={productos}
+            setEjecutarConsulta={setEjecutarConsulta}
+          />
         ) : (
           <FormularioProductos
             setMostrarTabla={setMostrarTabla}
@@ -68,13 +71,13 @@ const Productos = () => {
 
 //componentes para mostar formulario o tabla
 const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
-  const [busqueda, setBusqueda] = useState('');
+  const [busqueda, setBusqueda] = useState("");
   const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
 
   useEffect(() => {
     setProductosFiltrados(
       listaProductos.filter((elemento) => {
-        return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+        return (elemento).toLowerCase().includes(busqueda.toLowerCase());
       })
     );
   }, [busqueda, listaProductos]);
@@ -126,7 +129,13 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
           </thead>
           <tbody>
             {listaProductos.map((productos) => {
-              return <FilaProducto key={nanoid()} productos={productos} />;
+              return (
+                <FilaProducto
+                  key={nanoid()}
+                  productos={productos}
+                  setEjecutarConsulta={setEjecutarConsulta}
+                />
+              );
             })}
           </tbody>
         </table>
@@ -362,7 +371,7 @@ const FormularioProductos = ({
 
     setMostrarTabla(true);
 
-    //toast.success("Se ha registrado el producto con éxito"); BORRRARRRRRRRR
+
   };
   return (
     <div className="flex flex-col items-center justify-center">
