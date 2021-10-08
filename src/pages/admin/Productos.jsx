@@ -1,45 +1,31 @@
-import { Dialog, Tooltip } from "@material-ui/core";
-import { nanoid } from "nanoid";
 import React, { useEffect, useState, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import { nanoid } from "nanoid";
+import { Dialog, Tooltip } from "@material-ui/core";
+import { obtenerProductos } from "utils/api";
 import "react-toastify/dist/ReactToastify.css";
 
-const prodcutosBackend = [
-  {
-    idProducto: 1234,
-    nombreProducto: "Celular",
-    valorUnitario: 800000,
-    estado: "Disponible",
-  },
-  {
-    idProducto: 1235,
-    nombreProducto: "Tablet",
-    valorUnitario: 400000,
-    estado: "Disponible",
-  },
-  {
-    idProducto: 1236,
-    nombreProducto: "Portatil",
-    valorUnitario: 2500000,
-    estado: "Disponible",
-  },
-  {
-    idProducto: 1237,
-    nombreProducto: "TV 32",
-    valorUnitario: 2000000,
-    estado: "No Disponible",
-  },
-];
 const Productos = () => {
   // Estados
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [productos, setProductos] = useState([]); //pata obtener informacion desde el backend
   const [textoBoton, setTextoBoton] = useState("Registrar Producto");
+  const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
   useEffect(() => {
-    //Obtener productos desde el backend
-    setProductos(prodcutosBackend);
-  }, []);
+    console.log("consulta", ejecutarConsulta);
+    if (ejecutarConsulta) {
+      obtenerProductos(setProductos, setEjecutarConsulta);
+    }
+  }, [ejecutarConsulta]);
+
+  useEffect(() => {
+    //obtener lista de productos desde el backend
+    if (mostrarTabla) {
+      setEjecutarConsulta(true);
+    }
+  }, [mostrarTabla]);
 
   useEffect(() => {
     {
@@ -66,7 +52,7 @@ const Productos = () => {
 
       <div className="p-10">
         {mostrarTabla ? (
-          <TablaProductos listaProductos={productos} />
+          <TablaProductos listaProductos={productos} setEjecutarConsulta={setEjecutarConsulta} />
         ) : (
           <FormularioProductos
             setMostrarTabla={setMostrarTabla}
@@ -81,7 +67,18 @@ const Productos = () => {
 };
 
 //componentes para mostar formulario o tabla
-const TablaProductos = ({ listaProductos }) => {
+const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
+  const [busqueda, setBusqueda] = useState('');
+  const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
+
+  useEffect(() => {
+    setProductosFiltrados(
+      listaProductos.filter((elemento) => {
+        return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+      })
+    );
+  }, [busqueda, listaProductos]);
+
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div>
@@ -138,9 +135,61 @@ const TablaProductos = ({ listaProductos }) => {
   );
 };
 
-const FilaProducto = ({ productos }) => {
+const FilaProducto = ({ productos, setEjecutarConsulta }) => {
   const [edit, setEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  const [infoNuevoProducto, setInfoNuevoProducto] = useState({
+    idProducto: productos.idProducto,
+    nombreProducto: productos.nombreProducto,
+    valorUnitario: productos.valorUnitario,
+    estado: productos.estado,
+  });
+
+  const actualizarProducto = async () => {
+    //enviar la info al backend
+    const options = {
+      method: "PATCH",
+      url: "https://vast-waters-45728.herokuapp.com/vehicle/update/",
+      headers: { "Content-Type": "application/json" },
+      data: { ...infoNuevoProducto, id: productos._id },
+    };
+
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        toast.success("El producto se ha modificado con éxito");
+        setEdit(false);
+        setEjecutarConsulta(true);
+      })
+      .catch(function (error) {
+        toast.error("Error al modificar el producto");
+        console.error(error);
+      });
+  };
+
+  const eliminarProducto = async () => {
+    const options = {
+      method: "DELETE",
+      url: "https://vast-waters-45728.herokuapp.com/vehicle/delete/",
+      headers: { "Content-Type": "application/json" },
+      data: { id: productos._id },
+    };
+
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        toast.success("El producto se ha eliminado con éxito");
+        setEjecutarConsulta(true);
+      })
+      .catch(function (error) {
+        console.error(error);
+        toast.error("Error al eliminar el producto");
+      });
+    setOpenDialog(false);
+  };
+
   return (
     <tr>
       {edit ? (
@@ -149,31 +198,55 @@ const FilaProducto = ({ productos }) => {
             <input
               className="Input"
               type="number"
-              defaultValue={productos.idProducto}
+              value={infoNuevoProducto.idProducto}
+              onChange={(e) =>
+                setInfoNuevoProducto({
+                  ...infoNuevoProducto,
+                  idProducto: e.target.value,
+                })
+              }
             />
           </td>
           <td>
             <input
               className="Input"
               type="text"
-              defaultValue={productos.nombreProducto}
+              value={infoNuevoProducto.nombreProducto}
+              onChange={(e) =>
+                setInfoNuevoProducto({
+                  ...infoNuevoProducto,
+                  nombreProducto: e.target.value,
+                })
+              }
             />
           </td>
           <td>
             <input
               className="Input"
               type="number"
-              defaultValue={productos.valorUnitario}
+              value={infoNuevoProducto.valorUnitario}
+              onChange={(e) =>
+                setInfoNuevoProducto({
+                  ...infoNuevoProducto,
+                  valorUnitario: e.target.value,
+                })
+              }
             />
           </td>
           <td>
             <select
               className="Input"
               type="text"
-              defaultValue={productos.estado}
+              value={infoNuevoProducto.estado}
+              onChange={(e) =>
+                setInfoNuevoProducto({
+                  ...infoNuevoProducto,
+                  estado: e.target.value,
+                })
+              }
             >
               <option disabled value={0}>
-                Seleccione una opción{" "}
+                Seleccione una opción
               </option>
               <option>Disponible </option>
               <option>No disponible </option>
@@ -192,31 +265,32 @@ const FilaProducto = ({ productos }) => {
         <div className="flex w-full justify-around">
           {edit ? (
             <>
-              <Tooltip title="Confirmar Edición" arrow >
+              <Tooltip title="Confirmar Edición" arrow>
                 <i
-                  onClick={() => setEdit(!edit)}
+                  onClick={() => actualizarProducto()}
                   className="fas fa-check p-2 hover:bg-blue-600 rounded-full"
                 />
               </Tooltip>
-              <Tooltip title="Cancelar Edición" arrow >
+              <Tooltip title="Cancelar Edición" arrow>
                 <i
                   onClick={() => setEdit(!edit)}
                   className="fas fa-times p-2 hover:bg-blue-600 rounded-full"
                 />
               </Tooltip>
-
             </>
-
           ) : (
             <>
-              <Tooltip title="Editar Producto" arrow >
+              <Tooltip title="Editar Producto" arrow>
                 <i
                   onClick={() => setEdit(!edit)}
                   className="fas fa-pencil-alt p-2 hover:bg-blue-600 rounded-full"
                 />
               </Tooltip>
-              <Tooltip title="Elminar Producto" arrow >
-                <i onClick={() => setOpenDialog(true)} className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full" />
+              <Tooltip title="Elminar Producto" arrow>
+                <i
+                  onClick={() => setOpenDialog(true)}
+                  className="fas fa-trash-alt p-2 hover:bg-blue-600 rounded-full"
+                />
               </Tooltip>
             </>
           )}
@@ -227,17 +301,20 @@ const FilaProducto = ({ productos }) => {
               ¿Está seguro de querer eliminar el producto?
             </h1>
             <div className="flex w-full items-center justify-center my-4">
-              <button className="mx-2 px-4 py-2 bg-blue-500 text-white hover:bg-blue-700 rounded-md shadow-md">
+              <button
+                onClick={() => eliminarProducto()}
+                className="mx-2 px-4 py-2 bg-blue-500 text-white hover:bg-blue-700 rounded-md shadow-md"
+              >
                 Sí
               </button>
               <button
-              onClick={()=> setOpenDialog(false)}
-              className="mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md">
+                onClick={() => setOpenDialog(false)}
+                className="mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md"
+              >
                 No
               </button>
             </div>
           </div>
-
         </Dialog>
       </td>
     </tr>
@@ -251,7 +328,7 @@ const FormularioProductos = ({
 }) => {
   const form = useRef(null);
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
 
@@ -260,10 +337,32 @@ const FormularioProductos = ({
       nuevoProducto[key] = value;
     });
 
-    setMostrarTabla(true);
-    setProductos([...listaProductos, nuevoProducto]);
+    const options = {
+      method: "POST",
+      url: "https://vast-waters-45728.herokuapp.com/vehicle/create",
+      headers: { "Content-Type": "application/json" },
+      data: {
+        idProducto: nuevoProducto.idProducto,
+        nombreProducto: nuevoProducto.nombreProducto,
+        valorUnitario: nuevoProducto.valorUnitario,
+        estado: nuevoProducto.estado,
+      },
+    };
 
-    toast.success("Se ha registrado el producto con éxito");
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        toast.success("Se ha agregado el producto con éxito");
+      })
+      .catch(function (error) {
+        console.error(error);
+        toast.error("Error creando un producto");
+      });
+
+    setMostrarTabla(true);
+
+    //toast.success("Se ha registrado el producto con éxito"); BORRRARRRRRRRR
   };
   return (
     <div className="flex flex-col items-center justify-center">
