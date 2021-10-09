@@ -77,7 +77,7 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
   useEffect(() => {
     setProductosFiltrados(
       listaProductos.filter((elemento) => {
-        return (elemento).toLowerCase().includes(busqueda.toLowerCase());
+        return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
       })
     );
   }, [busqueda, listaProductos]);
@@ -128,7 +128,7 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
             </tr>
           </thead>
           <tbody>
-            {listaProductos.map((productos) => {
+            {productosFiltrados.map((productos) => {
               return (
                 <FilaProducto
                   key={nanoid()}
@@ -148,6 +148,7 @@ const FilaProducto = ({ productos, setEjecutarConsulta }) => {
   const [edit, setEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [infoNuevoProducto, setInfoNuevoProducto] = useState({
+    _id: productos._id,
     idProducto: productos.idProducto,
     nombreProducto: productos.nombreProducto,
     valorUnitario: productos.valorUnitario,
@@ -158,9 +159,9 @@ const FilaProducto = ({ productos, setEjecutarConsulta }) => {
     //enviar la info al backend
     const options = {
       method: "PATCH",
-      url: "https://vast-waters-45728.herokuapp.com/vehicle/update/",
+      url: `http://localhost:5000/productos/${productos._id}/`,
       headers: { "Content-Type": "application/json" },
-      data: { ...infoNuevoProducto, id: productos._id },
+      data: { ...infoNuevoProducto,  id: productos._id},
     };
 
     await axios
@@ -180,7 +181,7 @@ const FilaProducto = ({ productos, setEjecutarConsulta }) => {
   const eliminarProducto = async () => {
     const options = {
       method: "DELETE",
-      url: "https://vast-waters-45728.herokuapp.com/vehicle/delete/",
+      url: `http://localhost:5000/productos/${productos._id}/`,
       headers: { "Content-Type": "application/json" },
       data: { id: productos._id },
     };
@@ -203,6 +204,7 @@ const FilaProducto = ({ productos, setEjecutarConsulta }) => {
     <tr>
       {edit ? (
         <>
+          
           <td>
             <input
               className="Input"
@@ -264,6 +266,7 @@ const FilaProducto = ({ productos, setEjecutarConsulta }) => {
         </>
       ) : (
         <>
+          
           <td> {productos.idProducto} </td>
           <td> {productos.nombreProducto} </td>
           <td> {productos.valorUnitario} </td>
@@ -348,7 +351,7 @@ const FormularioProductos = ({
 
     const options = {
       method: "POST",
-      url: "https://vast-waters-45728.herokuapp.com/vehicle/create",
+      url: 'http://localhost:5000/productos/nuevo/',
       headers: { "Content-Type": "application/json" },
       data: {
         idProducto: nuevoProducto.idProducto,
